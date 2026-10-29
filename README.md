@@ -62,7 +62,7 @@ Then make a figure of the run: `.venv/bin/python make_figure.py --target Nucleus
 
 With only 8 training images (Study 2), expect the model to learn little: most of each field of view is empty background, and a model can get a low MAE by predicting background everywhere. `train_lmc.py` therefore centres 70% of the patches on the target signal (`--fg-frac`). More acquisition sets help more than more epochs.
 
-Things to try, one at a time: `--target Mitochondria`, more epochs, `--patch 64`, another study, `nn.MSELoss()` instead of `nn.L1Loss()` in `train_lmc.py`.
+Things to try, one at a time: `--target Mitochondria`, more epochs, `--patch 64`, another study, `--loss l1` (it tends to predict an all-black image: the median of a mostly empty field is 0).
 
 ## Data
 

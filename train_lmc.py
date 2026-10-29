@@ -90,6 +90,8 @@ def main():
     ap.add_argument("--per-image", type=int, default=16, help="random patches per image per epoch")
     ap.add_argument("--fg-frac", type=float, default=0.7, help="share of patches centred on the target signal")
     ap.add_argument("--val-frac", type=float, default=0.2)
+    ap.add_argument("--loss", default="mse", choices=["mse", "l1"],
+                    help="mse predicts the mean; l1 predicts the median, which is 0 when most pixels are background")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="outputs")
     args = ap.parse_args()
@@ -111,7 +113,7 @@ def main():
     dl = DataLoader(Patches(train, args.patch, args.per_image, args.fg_frac), batch_size=8, shuffle=True)
     model = TinyUNet().to(device)
     opt = torch.optim.Adam(model.parameters(), lr=1e-3)
-    loss_fn = nn.L1Loss()
+    loss_fn = nn.MSELoss() if args.loss == "mse" else nn.L1Loss()
 
     history = []
     for epoch in range(args.epochs):
@@ -125,8 +127,8 @@ def main():
             opt.step()
             total += loss.item() * len(x)
         val_mae = np.mean([mae(*crop_pred(model, p, device)) for p in val])
-        print(f"epoch {epoch:3d}  train L1 {total / len(dl.dataset):.4f}  val MAE {val_mae:.4f}")
-        history.append({"epoch": epoch, "train_L1": total / len(dl.dataset), "val_MAE": val_mae})
+        print(f"epoch {epoch:3d}  train loss {total / len(dl.dataset):.4f}  val MAE {val_mae:.4f}")
+        history.append({"epoch": epoch, "train_loss": total / len(dl.dataset), "val_MAE": val_mae})
 
     out = Path(args.out)
     out.mkdir(exist_ok=True)

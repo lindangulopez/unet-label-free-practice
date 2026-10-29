@@ -37,7 +37,7 @@ def main():
         ax.set_title(title, fontsize=11)
         ax.axis("off")
     ax = fig.add_subplot(grid[3])
-    ax.plot(history["epoch"], history["train_L1"], label="train L1")
+    ax.plot(history["epoch"], history["train_loss"], label="train loss")
     ax.plot(history["epoch"], history["val_MAE"], label="validation MAE")
     ax.set_xlabel("epoch")
     ax.legend(frameon=False)
