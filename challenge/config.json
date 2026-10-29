@@ -1,0 +1,7 @@
+{
+  "task": "predict the nucleus fluorescence image from a transmitted-light image",
+  "target": "Nucleus",
+  "train_data": "Light My Cells Study_23 (BioImage Archive S-BIAD1047)",
+  "test_data": "Light My Cells Study_2 (BioImage Archive S-BIAD1047), a study not seen in training",
+  "test_set_ids": [43,44,45,46,47,48,49,50,51,52]
+}

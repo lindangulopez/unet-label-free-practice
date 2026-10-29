@@ -1,0 +1,10 @@
+{
+  "team": "baseline: copy the input",
+  "method": "No model: the sharpest DIC plane, normalised, is the prediction",
+  "date": "2026-10-29",
+  "code_url": "https://github.com/lindangulopez/unet-label-free-practice/blob/main/predict.py",
+  "licence": "MIT",
+  "swhid": "",
+  "codemeta": "",
+  "rerun": ""
+}

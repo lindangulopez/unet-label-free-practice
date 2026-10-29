@@ -1,0 +1,12 @@
+# Environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Downloaded data and training outputs
+data/
+outputs/
+*.pt
+*.part
+preds/

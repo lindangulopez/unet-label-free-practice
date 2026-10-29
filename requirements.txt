@@ -1,0 +1,8 @@
+numpy
+pandas
+scipy
+scikit-image
+tifffile
+# torch: install separately, see README (CPU wheel)
+matplotlib
+tabulate

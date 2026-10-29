@@ -1,0 +1,32 @@
+name: leaderboard
+
+on:
+  pull_request:
+    paths: ["submissions/**", "challenge/**"]
+  push:
+    branches: [main]
+    paths: ["submissions/**", "challenge/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  leaderboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas tabulate
+      - name: Check submissions
+        run: python challenge/leaderboard.py --check
+      - name: Rebuild the leaderboard
+        if: github.event_name == 'push'
+        run: |
+          python challenge/leaderboard.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add LEADERBOARD.md
+          git diff --cached --quiet || git commit -m "Update leaderboard"
+          git push

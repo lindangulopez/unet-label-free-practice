@@ -1,0 +1,10 @@
+{
+  "team": "your-team-name",
+  "method": "One sentence: model, loss, training data, pre-trained weights if any",
+  "date": "2026-11-01",
+  "code_url": "https://github.com/you/your-method",
+  "licence": "MIT",
+  "swhid": "",
+  "codemeta": "",
+  "rerun": ""
+}
